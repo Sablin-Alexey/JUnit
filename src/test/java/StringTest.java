@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeAll;
 
 public class StringTest {
 
-    Person sut;
 
     @BeforeAll
     public static void started() {
@@ -16,20 +15,21 @@ public class StringTest {
         System.out.println("Tests finished");
     }
 
+    LocalizationServiceImpl sut;
 
     @org.junit.jupiter.api.Test
     public void testConcat_validArgument_success() {
+        sut = new LocalizationServiceImpl();
 
-        sut = new Person("Jake", "Goodnight", 33, Sex.WOMEN, Education.ELEMENTARY);
 
-        // given:
-        final String original = "Name of Person is ";
-         final String argument = sut.getName();
-         final String expected = "Name of Person is Jake";
-// when:
- final String result = original.concat(argument);
-// then:
- Assertions.assertEquals(expected, result);
+        final String original = sut.locale("RUSSIA");
+        final String argument = " man";
+        final String expected = "Добро пожаловать man";
+
+        final String result = original.concat(argument);
+
+
+        Assertions.assertEquals(expected, result);
 
     }
 }
